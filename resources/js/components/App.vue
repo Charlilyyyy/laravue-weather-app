@@ -14,10 +14,12 @@
                     <div>
                         <button @click="showWeather()" class="mb-4 btn btn-success">Check weather</button>
                     </div>
-                    <div class="display">
-                        <!-- {{ cityResult }} -->
-                        <!-- {{ fmtWeatherData }} -->
+                    <!-- <div  v-if="cityResult.weather[0].main == 'Clouds'" class="display">
                     </div>
+                    <div  v-else-if="cityResult.weather[0].main == 'Rain'" class="display">
+                    </div>
+                    <div  v-if="cityResult.weather[0].main == 'Clear'" class="display">
+                    </div> -->
                     <div class="table-responsive">
                         <table class="table table-bordered align-middle">
                             <thead class="thead-light text-center">
@@ -34,7 +36,7 @@
                             <tbody v-if="cityResult">
                                 <!-- <tr v-for="(cityRes,index) in cityResult" :key="index"> -->
                                     <td>{{ cityResult.name }}</td>
-                                    <td>{{ cityResult.name }}</td>
+                                    <td>{{ cityResult.sys.country}}</td>
                                     <td>{{ cityResult.main.temp }} F</td>
                                     <td>{{ cityResult.weather[0].description }}</td>
                                     <td>{{ cityResult.main.humidity }}%</td>
@@ -42,7 +44,7 @@
                                 <!-- </tr> -->
                             </tbody>
                             <tbody v-else>
-                                No city selected
+                                No result
                             </tbody>
                         </table>
                     </div>
@@ -72,6 +74,18 @@
 // 		'X-RapidAPI-Host': 'open-weather13.p.rapidapi.com'
 // 	}
 // };
+document.addEventListener('DOMContentLoaded', function() {
+	// const url1 = 
+    const url1 = 'https://wft-geo-db.p.rapidapi.com/v1/geo/countries/US/regions/CA/places';
+    const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '4bd17f071cmsh36b0e0e05d6df6ap137ef3jsn7a23427628f1',
+		'X-RapidAPI-Host': 'wft-geo-db.p.rapidapi.com'
+	}
+};
+					  
+});
 
 export default {
     name: 'App',
@@ -86,7 +100,7 @@ export default {
         async showWeather(){
             const encodedCity = encodeURIComponent(this.cityInput);
             // console.log(this.userInput)
-            console.log(encodedCity);
+            // console.log(encodedCity);
             const url = `https://open-weather13.p.rapidapi.com/city/${encodedCity}`;
             const options = {
                 method: 'GET',
